@@ -1,14 +1,14 @@
 import requests
 
-BASE_URL = "http://localhost:8081"
+BASE_URL = "http://3.212.156.160:8081"
 
 # 1. Login para obtener token
 login_data = {
-    "User_mail": "alla@coorreea",
+    "User_mail": "leloor",
     "password": "1234"
 }
 
-resp_login = requests.post(f"http://localhost:8080/login", json=login_data)
+resp_login = requests.post(f"http://52.203.72.116:8080/login", json=login_data)
 
 if resp_login.status_code != 200:
     print("Error al hacer login:", resp_login.status_code, resp_login.json())
