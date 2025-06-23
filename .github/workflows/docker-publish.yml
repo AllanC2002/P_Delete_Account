@@ -110,19 +110,25 @@ jobs:
             username: ubuntu
             key: ${{ secrets.EC2_PEM }}
             script: |
-              docker stop project_create_user || true
-              docker rm project_create_user || true
+              docker stop project_delete_user || true
+              docker rm project_delete_user || true
               docker rmi ${{ secrets.DOCKER_REPO }}:qa || true
 
               docker pull ${{ secrets.DOCKER_REPO }}:qa
 
               docker run -d \
                 --restart always \
-                --name project_create_user \
-                -p 8080:8080 \
+                --name project_delete_user \
+                -p 8081:8081 \
+                -e DBU_HOSTIP=${{ secrets.DBU_HOSTIP }} \
+                -e DBU_PORT=${{ secrets.DBU_PORT }} \
+                -e DBU_USER=${{ secrets.DBU_USER }} \
+                -e DBU_PASSWORD=${{ secrets.DBU_PASSWORD }} \
+                -e DBU_NAME=${{ secrets.DBU_NAME }} \
                 -e DBA_HOSTIP=${{ secrets.DBA_HOSTIP }} \
                 -e DBA_PORT=${{ secrets.DBA_PORT }} \
                 -e DBA_USER=${{ secrets.DBA_USER }} \
                 -e DBA_PASSWORD=${{ secrets.DBA_PASSWORD }} \
                 -e DBA_NAME=${{ secrets.DBA_NAME }} \
+                -e SECRET_KEY=${{ secrets.SECRET_KEY }} \
                 ${{ secrets.DOCKER_REPO }}:qa
