@@ -2,7 +2,6 @@ import requests
 
 BASE_URL = "http://3.212.156.160:8081"
 
-# 1. Login para obtener token
 login_data = {
     "User_mail": "leloor",
     "password": "1234"
@@ -17,7 +16,6 @@ if resp_login.status_code != 200:
 token = resp_login.json().get("token")
 print("Token JWT:", token)
 
-# 2. Usar token para eliminar cuenta
 headers = {
     "Authorization": f"Bearer {token}"
 }
