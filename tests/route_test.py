@@ -3,7 +3,7 @@ import requests
 BASE_URL = "http://3.212.156.160:8081"
 
 login_data = {
-    "User_mail": "leloor",
+    "User_mail": "allancorrea2",
     "password": "1234"
 }
 
@@ -22,4 +22,4 @@ headers = {
 
 resp_delete = requests.delete(f"{BASE_URL}/delete-account", headers=headers)
 
-print("Respuesta al eliminar cuenta:", resp_delete.status_code, resp_delete.json())
+print("Response:", resp_delete.status_code, resp_delete.json())
